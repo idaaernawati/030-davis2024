@@ -6,8 +6,8 @@ import seaborn as sns
 def main():
     st.title("Visualisasi Data Tips")
     
-    # Baca dataset
-    data = pd.read_csv("D:\\Ida Ernawati\\Documents\\e-book college\\6\\DAVIS (P. Irwan)\\Datasets\\tips.csv")
+    # Baca dataset (gunakan path relatif jika file berada dalam folder yang sama dengan script)
+    data = pd.read_csv("tips.csv")
     
     # Pilihan visualisasi
     chart_type = st.sidebar.selectbox("Pilih Jenis Visualisasi", ["Scatter Plot", "Line Plot", "Bar Plot", "Histogram"])
