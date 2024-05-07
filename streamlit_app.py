@@ -13,44 +13,46 @@ def main():
     chart_type = st.sidebar.selectbox("Pilih Jenis Visualisasi", ["Scatter Plot", "Line Plot", "Bar Plot", "Histogram"])
     
     if chart_type == "Scatter Plot":
-        st.subheader("Scatter Plot")
         scatter_plot(data)
     elif chart_type == "Line Plot":
-        st.subheader("Line Plot")
         line_plot(data)
     elif chart_type == "Bar Plot":
-        st.subheader("Bar Plot")
         bar_plot(data)
     elif chart_type == "Histogram":
-        st.subheader("Histogram")
         histogram(data)
 
 def scatter_plot(data):
+    st.subheader("Scatter Plot")
     # Scatter plot with day against tip
-    plt.scatter(data['day'], data['tip'], c=data['size'], s=data['total_bill'])
+    fig, ax = plt.subplots()
+    ax.scatter(data['day'], data['tip'], c=data['size'], s=data['total_bill'])
     # Adding Title to the Plot
-    plt.title("Scatter Plot")
+    ax.set_title("Scatter Plot")
     # Setting the X and Y labels
-    plt.xlabel('Day')
-    plt.ylabel('Tip')
-    plt.colorbar()
-    st.pyplot()
+    ax.set_xlabel('Day')
+    ax.set_ylabel('Tip')
+    ax.colorbar()
+    st.pyplot(fig)
 
 def line_plot(data):
-    plt.plot(data['tip'])
-    plt.plot(data['size'])
+    st.subheader("Line Plot")
+    fig, ax = plt.subplots()
+    ax.plot(data['tip'])
+    ax.plot(data['size'])
     # Adding Title to the Plot
-    plt.title("Line Plot")
+    ax.set_title("Line Plot")
     # Setting the X and Y labels
-    plt.xlabel('Index')
-    plt.ylabel('Value')
-    st.pyplot()
+    ax.set_xlabel('Index')
+    ax.set_ylabel('Value')
+    st.pyplot(fig)
 
 def bar_plot(data):
+    st.subheader("Bar Plot")
     sns.barplot(x='day',y='tip', data=data, hue='sex')
     st.pyplot()
 
 def histogram(data):
+    st.subheader("Histogram")
     sns.histplot(x='total_bill', data=data, kde=True, hue='sex')
     st.pyplot()
 
