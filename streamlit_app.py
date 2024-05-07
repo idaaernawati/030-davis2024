@@ -48,13 +48,15 @@ def line_plot(data):
 
 def bar_plot(data):
     st.subheader("Bar Plot")
-    sns.barplot(x='day',y='tip', data=data, hue='sex')
-    st.pyplot()
+    fig, ax = plt.subplots()
+    sns.barplot(x='day',y='tip', data=data, hue='sex', ax=ax)
+    st.pyplot(fig)
 
 def histogram(data):
     st.subheader("Histogram")
-    sns.histplot(x='total_bill', data=data, kde=True, hue='sex')
-    st.pyplot()
+    fig, ax = plt.subplots()
+    sns.histplot(x='total_bill', data=data, kde=True, hue='sex', ax=ax)
+    st.pyplot(fig)
 
 if __name__ == "__main__":
     main()
