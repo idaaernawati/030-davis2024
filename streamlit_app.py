@@ -3,58 +3,49 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def main():
-    st.title("Visualisasi Data Tips")
-    
-    # Baca dataset (gunakan path relatif jika file berada dalam folder yang sama dengan script)
-    data = pd.read_csv("tips.csv")
-    
-    # Pilihan visualisasi
-    chart_type = st.sidebar.selectbox("Pilih Jenis Visualisasi", ["Scatter Plot", "Line Plot", "Bar Plot", "Histogram"])
-    
-    if chart_type == "Scatter Plot":
-        scatter_plot(data)
-    elif chart_type == "Line Plot":
-        line_plot(data)
-    elif chart_type == "Bar Plot":
-        bar_plot(data)
-    elif chart_type == "Histogram":
-        histogram(data)
+st.subheader("Diagram Batang")
+# reading the database
+data = pd.read_csv("D:\\Ida Ernawati\\Documents\\e-book college\\6\\DAVIS (P. Irwan)\\Datasets\\tips.csv")
 
-def scatter_plot(data):
-    st.subheader("Scatter Plot")
-    # Scatter plot with day against tip
-    fig, ax = plt.subplots()
-    ax.scatter(data['day'], data['tip'], c=data['size'], s=data['total_bill'])
-    # Adding Title to the Plot
-    ax.set_title("Scatter Plot")
-    # Setting the X and Y labels
-    ax.set_xlabel('Day')
-    ax.set_ylabel('Tip')
-    ax.colorbar()
-    st.pyplot(fig)
+# Bar chart with day against tip
+fig, ax = plt.subplots()
+ax.bar(data['day'], data['tip'])
+ax.set_title("Bar Chart")
+ax.set_xlabel('Day')
+ax.set_ylabel('Tip')
 
-def line_plot(data):
-    st.subheader("Line Plot")
-    fig, ax = plt.subplots()
-    ax.plot(data['tip'])
-    ax.plot(data['size'])
-    # Adding Title to the Plot
-    ax.set_title("Line Plot")
-    # Setting the X and Y labels
-    ax.set_xlabel('Index')
-    ax.set_ylabel('Value')
-    st.pyplot(fig)
+# Display the plot using st.pyplot() with the figure object
+st.pyplot(fig)
 
-def bar_plot(data):
-    st.subheader("Bar Plot")
-    sns.barplot(x='day',y='tip', data=data, hue='sex')
-    st.pyplot()
+############################################################
+st.subheader("Histogram")
+# Create the figure and axis objects
+fig, ax = plt.subplots()
 
-def histogram(data):
-    st.subheader("Histogram")
-    sns.histplot(x='total_bill', data=data, kde=True, hue='sex')
-    st.pyplot()
+# Create the histogram using seaborn
+sns.histplot(x='total_bill', data=data, kde=True, hue='sex', ax=ax)
 
-if __name__ == "__main__":
-    main()
+# Display the plot using st.pyplot() with the figure object
+st.pyplot(fig)
+
+############################################################
+st.subheader("Sliders and Selectors")
+# This section cannot be directly converted as is to Streamlit because it involves Plotly, which requires a different approach
+# Streamlit does support Plotly charts, but we need to use the streamlit.plotly_chart() function
+
+# Instead of directly converting this section, I'll show you how to create an interactive Plotly chart using Streamlit:
+
+import plotly.express as px
+
+# Create the Plotly figure
+fig = px.scatter(data, x='day', y='tip', color='size', size='total_bill')
+
+# Update layout
+fig.update_layout(
+    title="Scatter Plot",
+    xaxis_title="Day",
+    yaxis_title="Tip"
+)
+
+# Display the Plotly chart using st.plotly_chart()
+st.plotly_chart(fig)
