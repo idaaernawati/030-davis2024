@@ -25,13 +25,13 @@ def scatter_plot(data):
     st.subheader("Scatter Plot")
     # Scatter plot with day against tip
     fig, ax = plt.subplots()
-    ax.scatter(data['day'], data['tip'], c=data['size'], s=data['total_bill'])
+    scatter = ax.scatter(data['day'], data['tip'], c=data['size'], s=data['total_bill'])
     # Adding Title to the Plot
     ax.set_title("Scatter Plot")
     # Setting the X and Y labels
     ax.set_xlabel('Day')
     ax.set_ylabel('Tip')
-    ax.colorbar()
+    fig.colorbar(scatter, ax=ax)
     st.pyplot(fig)
 
 def line_plot(data):
